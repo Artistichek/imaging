@@ -1,0 +1,27 @@
+logger:
+  level: "info"
+  output: "json"
+
+grpc:
+  port: 45899
+
+s3:
+  credentials:
+    keyId: ${AWS_ACCESS_KEY_ID}
+    secret: ${AWS_SECRET_ACCESS_KEY}
+  endpointResolver:
+    baseEndpoint: https://s3.storage.selcloud.ru
+    hostnameImmutable: true
+    region: ru-1
+  bucket: ftb-s3
+  baseDirectory: images
+  uploadTimeout: 10s
+
+processor:
+  sizes:
+    - 64
+    - 128
+    - 256
+    - 512
+  encodingFormat: webp
+  processTimeout: 10s

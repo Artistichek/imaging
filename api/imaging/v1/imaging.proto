@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package api.imaging.v1;
+
+option go_package = "github.com/Artistichek/grpc/api/imaging/v1;imagingpb";
+
+import "api/annotations/oneof.proto";
+import "google/api/field_behavior.proto";
+import "google/rpc/status.proto";
+
+service ImagingService {
+  // Обработка обложки игры и загрузка его в объектное хранилище.
+  // Обработка - выделение доминантного цвета, и изменение размеров.
+  // Картинка загружается по пути {base_directory}/{game_id}/{size}.
+  // Информация о доминантном цвете изображения хранится в метаданных Content-Type.
+  rpc ProcessImage(ProcessImageRequest) returns (ProcessImageResponse) {}
+}
+
+enum ProcessResult {
+  // Неизвестная ошибка.
+  PROCESS_RESULT_UNKNOWN = 0;
+
+  // Изображение обработано и загружено без ошибок.
+  OK = 1;
+
+  // Поврежденный файл (ошибка чтения файла).
+  CORRUPTED_IMAGE = 2;
+
+  // Получен файл в неправильном формате.
+  INVALID_IMAGE_FORMAT = 3;
+
+  // Недоступная ссылка.
+  IMAGE_URL_UNREACHABLE = 4;
+
+  // Изображение не предоставлено в задании.
+  IMAGE_NOT_PROVIDED = 5;
+
+  // Превышено ожидаемое время обработки изображения.
+  PROCESS_TIMEOUT_EXCEEDED = 6;
+
+  // Ошибка загрузки изображения в хранилище.
+  S3_IMAGE_UPLOAD_ERROR = 7;
+
+  // Превышено ожидаемое время загрузки в s3.
+  UPLOAD_TIMEOUT_EXCEEDED = 8;
+
+  // Внутренняя ошибка сервиса.
+  INTERNAL_ERROR = 9;
+}
+
+message ProcessImageRequest {
+  // Идентификатор задания на обработку изображения.
+  int64 job_id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  //  Идентификатор игры, изображение которой необходимо обработать.
+  string game_id = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Обложка игры.
+  oneof image {
+    option (api.annotations.oneof.oneof_behavior) = REQUIRED;
+
+    // URL-адрес.
+    string url = 3;
+
+    // Представление в байтах.
+    bytes file = 4;
+  };
+}
+
+message ProcessImageResponse {
+  // Идентификатор задания на обработку изображения.
+  int64 job_id = 1;
+
+  //  Идентификатор игры, изображение которой обрабатывали.
+  string game_id = 2;
+
+  // Результат выполнения операции.
+  ProcessResult result = 3;
+
+  // Статус выполненения операции.
+  google.rpc.Status status = 4;
+}

@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package api.annotations.oneof;
+
+import "google/api/field_behavior.proto";
+import "google/protobuf/descriptor.proto";
+
+option go_package = "github.com/Artistichek/imaging/api/annotations;annotationspb";
+
+extend .google.protobuf.OneofOptions {
+  repeated .google.api.FieldBehavior oneof_behavior = 1053;
+}
