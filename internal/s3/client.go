@@ -51,6 +51,9 @@ func NewClient(ctx context.Context, cfg *Config) (*Client, error) {
 	return c, nil
 }
 
+// UploadImages allows upload several images to s3 object storage,
+// if any upload process is finished with error or upload timeout exceeded,
+// method returns non-nil error.
 func (c *Client) UploadImages(parentCtx context.Context, objects []types.PutObjectInput) error {
 	// childCtx и parentCtx для отлавливания таймаутов на загрузку и общую обработку.
 	// uploadCtx для отлавливания ошибок загрузки изображений в s3.

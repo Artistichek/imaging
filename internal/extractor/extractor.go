@@ -10,6 +10,8 @@ import (
 	"github.com/Artistichek/imaging/internal/extractor/http"
 )
 
+// ExtractImage extract image from request, decode it to image.Image object
+// and return it's with possible error.
 func ExtractImage(req *imagingpb.ProcessImageRequest) (image.Image, error) {
 	var buffer []byte
 	var err error

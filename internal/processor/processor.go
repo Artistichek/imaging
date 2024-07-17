@@ -46,6 +46,9 @@ func New(ctx context.Context, cfg *Config) *Processor {
 	}
 }
 
+// ProcessImage run image processing according next flow:
+// get dominant color -> transform its to several sizes -> encode each image to webp format
+// and returns encoded images with dominant color and error, if its exists.
 func (p *Processor) ProcessImage(parentCtx context.Context, img image.Image) ([]bytes.Buffer, string, error) {
 	// childCtx и parentCtx для отлавливания таймаутов на обработку изображения и общую обработку.
 	childCtx, cancel := context.WithTimeout(parentCtx, p.cfg.ProcessTimeout)

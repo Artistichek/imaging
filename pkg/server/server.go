@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"errors"
-	"github.com/Artistichek/imaging/internal/processor/encoding"
 	"image"
 	"net/url"
 	"strconv"
@@ -22,6 +21,7 @@ import (
 	"github.com/Artistichek/imaging/internal/extractor/http"
 	"github.com/Artistichek/imaging/internal/processor"
 	"github.com/Artistichek/imaging/internal/processor/dominator"
+	"github.com/Artistichek/imaging/internal/processor/encoding"
 	"github.com/Artistichek/imaging/internal/s3"
 	"github.com/Artistichek/imaging/internal/s3/types"
 )
@@ -56,6 +56,9 @@ func New(ctx context.Context, p processor.ImageProcessor, s3 s3.APIClient) *Imag
 	}
 }
 
+// ProcessImage method runs the next flow:
+// extract image from request -> process image (details in processor.ProcessImage method) -> upload images to s3,
+// if any image upload fails with error, tries to remove all of them from object storage.
 func (s *ImagingServer) ProcessImage(ctx context.Context, req *imagingpb.ProcessImageRequest) (*imagingpb.ProcessImageResponse, error) {
 	resp := &imagingpb.ProcessImageResponse{
 		JobId:  req.JobId,
