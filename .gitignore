@@ -1,0 +1,6 @@
+#----Environment----
+/**/.env
+#-------------------
+#-----Intellij------
+.idea/
+.idea_modules/
