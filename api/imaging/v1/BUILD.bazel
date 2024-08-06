@@ -1,0 +1,26 @@
+load("@rules_go//proto:def.bzl", "go_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "imagingpb_proto",
+    srcs = ["imaging.proto"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//api/annotations:annotationspb_proto",
+        "@googleapis//google/api:field_behavior_proto",
+        "@googleapis//google/rpc:status_proto",
+    ],
+)
+
+go_proto_library(
+    name = "imagingpb_go_proto",
+    compilers = ["@rules_go//proto:go_grpc"],
+    importpath = "github.com/Artistichek/imaging/api/imaging/v1",
+    proto = ":imagingpb_proto",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//api/annotations:annotationspb_go_proto",
+        "@org_golang_google_genproto_googleapis_api//annotations",
+        "@org_golang_google_genproto_googleapis_rpc//status",
+    ],
+)

@@ -1,0 +1,17 @@
+load("@gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix github.com/Artistichek/imaging
+# gazelle:go_proto_compilers @rules_go//proto:go_proto
+# gazelle:go_grpc_compilers @rules_go//proto:go_grpc
+# gazelle:resolve proto    google/api/field_behavior.proto      @googleapis//google/api:field_behavior_proto
+# gazelle:resolve proto go google/api/field_behavior.proto      @org_golang_google_genproto_googleapis_api//annotations
+# gazelle:resolve proto    google/rpc/error_details.proto       @googleapis//google/rpc:error_details_proto
+# gazelle:resolve proto go google/rpc/error_details.proto       @org_golang_google_genproto_googleapis_rpc//errdetails
+# gazelle:resolve proto    google/rpc/code.proto                @googleapis//google/rpc:code_proto
+# gazelle:resolve proto go google/rpc/code.proto                @org_golang_google_genproto_googleapis_rpc//code
+# gazelle:resolve proto    google/rpc/status.proto              @googleapis//google/rpc:status_proto
+# gazelle:resolve proto go google/rpc/status.proto              @org_golang_google_genproto_googleapis_rpc//status
+# gazelle:exclude **/empty.go
+# gazelle:proto package
+# gazelle:proto_group go_package
+gazelle(name = "gazelle")

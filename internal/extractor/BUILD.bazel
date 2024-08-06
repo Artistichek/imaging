@@ -1,0 +1,27 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "extractor",
+    srcs = ["extractor.go"],
+    importpath = "github.com/Artistichek/imaging/internal/extractor",
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//api/imaging/v1:imagingpb_go_proto",
+        "//internal/extractor/decoding",
+        "//internal/extractor/http",
+    ],
+)
+
+go_test(
+    name = "extractor_test",
+    srcs = ["extractor_test.go"],
+    embed = [":extractor"],
+    deps = [
+        "//api/imaging/v1:imagingpb_go_proto",
+        "//internal/extractor/decoding",
+        "//internal/extractor/http",
+        "//test/base64",
+        "//test/errorcmp",
+        "@com_github_jarcoal_httpmock//:httpmock",
+    ],
+)

@@ -1,0 +1,16 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "dominator",
+    srcs = ["dominator.go"],
+    importpath = "github.com/Artistichek/imaging/internal/processor/dominator",
+    visibility = ["//:__subpackages__"],
+    deps = ["@com_github_cenkalti_dominantcolor//:dominantcolor"],
+)
+
+go_test(
+    name = "dominator_test",
+    srcs = ["dominator_test.go"],
+    embed = [":dominator"],
+    deps = ["@com_github_google_go_cmp//cmp"],
+)

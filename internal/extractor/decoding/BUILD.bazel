@@ -1,0 +1,18 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "decoding",
+    srcs = ["decoding.go"],
+    importpath = "github.com/Artistichek/imaging/internal/extractor/decoding",
+    visibility = ["//:__subpackages__"],
+)
+
+go_test(
+    name = "decoding_test",
+    srcs = ["decoding_test.go"],
+    embed = [":decoding"],
+    deps = [
+        "//test/base64",
+        "//test/errorcmp",
+    ],
+)

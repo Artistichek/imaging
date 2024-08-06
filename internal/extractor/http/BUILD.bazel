@@ -1,0 +1,18 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "http",
+    srcs = ["http.go"],
+    importpath = "github.com/Artistichek/imaging/internal/extractor/http",
+    visibility = ["//:__subpackages__"],
+)
+
+go_test(
+    name = "http_test",
+    srcs = ["http_test.go"],
+    embed = [":http"],
+    deps = [
+        "//test/errorcmp",
+        "@com_github_jarcoal_httpmock//:httpmock",
+    ],
+)

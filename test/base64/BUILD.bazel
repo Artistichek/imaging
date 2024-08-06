@@ -1,0 +1,8 @@
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "base64",
+    srcs = ["base64.go"],
+    importpath = "github.com/Artistichek/imaging/test/base64",
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,28 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "processor",
+    srcs = [
+        "config.go",
+        "processor.go",
+    ],
+    importpath = "github.com/Artistichek/imaging/internal/processor",
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//internal/processor/dominator",
+        "//internal/processor/encoding",
+        "//internal/processor/resizer",
+        "//logs",
+    ],
+)
+
+go_test(
+    name = "processor_test",
+    srcs = ["processor_test.go"],
+    embed = [":processor"],
+    deps = [
+        "//logs",
+        "//test/base64",
+        "//test/errorcmp",
+    ],
+)

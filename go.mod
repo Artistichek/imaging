@@ -1,6 +1,6 @@
 module github.com/Artistichek/imaging
 
-go 1.22
+go 1.22.4
 
 require (
 	github.com/anthonynsimon/bild v0.13.0
@@ -17,7 +17,7 @@ require (
 	github.com/rs/zerolog v1.33.0
 	github.com/spf13/viper v1.19.0
 	golang.org/x/sync v0.7.0
-	google.golang.org/genproto/googleapis/api v0.0.0-20240711142825-46eb208f015d
+	google.golang.org/genproto/googleapis/api v0.0.0-20240318140521-94a12d6c2237
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240701130421-f6361c86f094
 	google.golang.org/grpc v1.64.1
 	google.golang.org/protobuf v1.34.2

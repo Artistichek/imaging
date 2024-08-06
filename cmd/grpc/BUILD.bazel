@@ -1,0 +1,24 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "grpc_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/Artistichek/imaging/cmd/grpc",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//api/imaging/v1:imagingpb_go_proto",
+        "//config",
+        "//internal/processor",
+        "//internal/s3",
+        "//logs",
+        "//pkg/server",
+        "@org_golang_google_genproto_googleapis_api//:api",
+        "@org_golang_google_grpc//:grpc",
+    ],
+)
+
+go_binary(
+    name = "grpc",
+    embed = [":grpc_lib"],
+    visibility = ["//visibility:public"],
+)

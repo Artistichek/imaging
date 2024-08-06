@@ -1,0 +1,25 @@
+# gazelle:ignore
+load("@rules_go//go:def.bzl", "go_library", "gomock")
+
+gomock(
+    name = "mock_processor",
+    out = "mock_processor.go",
+    interfaces = [
+        "ImageProcessor",
+    ],
+    library = "//internal/processor",
+    package = "mock",
+    self_package = "github.com/Artistichek/imaging/internal/processor/mock",
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "mock",
+    srcs = ["mock_processor.go"],
+    importpath = "github.com/Artistichek/imaging/internal/processor/mock",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//internal/processor",
+        "@com_github_golang_mock//gomock",
+    ]
+)

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package api.imaging.v1;
 
-option go_package = "github.com/Artistichek/grpc/api/imaging/v1;imagingpb";
+option go_package = "github.com/Artistichek/imaging/api/imaging/v1;imagingpb";
 
 import "api/annotations/oneof.proto";
 import "google/api/field_behavior.proto";

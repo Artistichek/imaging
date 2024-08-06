@@ -1,0 +1,26 @@
+# gazelle:ignore
+load("@rules_go//go:def.bzl", "go_library", "gomock")
+
+gomock(
+    name = "mock_s3_client",
+    out = "mock_s3_client.go",
+    interfaces = [
+        "APIClient",
+    ],
+    library = "//internal/s3",
+    package = "mock",
+    self_package = "github.com/Artistichek/imaging/internal/s3/mock",
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "mock",
+    srcs = ["mock_s3_client.go"],
+    importpath = "github.com/Artistichek/imaging/internal/s3/mock",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//internal/s3/types",
+        "//internal/s3",
+        "@com_github_golang_mock//gomock",
+    ]
+)

@@ -8,6 +8,9 @@ import (
 	"os"
 	"os/signal"
 
+	//TODO(Artistichek): remove redundant dependency
+	_ "google.golang.org/genproto/googleapis/api"
+
 	"google.golang.org/grpc"
 
 	imagingpb "github.com/Artistichek/imaging/api/imaging/v1"

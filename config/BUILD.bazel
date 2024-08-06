@@ -1,0 +1,17 @@
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "config",
+    srcs = ["config.go"],
+    embedsrcs = ["config.yml"],
+    importpath = "github.com/Artistichek/imaging/config",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//internal/processor",
+        "//internal/s3",
+        "//logs",
+        "@com_github_mitchellh_mapstructure//:mapstructure",
+        "@com_github_rs_zerolog//:zerolog",
+        "@com_github_spf13_viper//:viper",
+    ],
+)
