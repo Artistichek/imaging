@@ -4,3 +4,6 @@
 #-----Intellij------
 .idea/
 .idea_modules/
+#-------Bazel-------
+bazel-*
+.ijwb
